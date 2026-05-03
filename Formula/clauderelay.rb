@@ -1,8 +1,8 @@
 class Clauderelay < Formula
   desc "Remote terminal relay server and CLI over WebSocket"
   homepage "https://github.com/miguelriotinto/ClaudeRelay"
-  url "https://github.com/miguelriotinto/ClaudeRelay/archive/refs/tags/v0.2.2.tar.gz"
-  sha256 "b2928bae71e79d6210ae0170ec2647af87925b95d872f11c1b6f050d6a6eb23c"
+  url "https://github.com/miguelriotinto/ClaudeRelay/archive/refs/tags/v0.2.3.tar.gz"
+  sha256 "4ea1bf8d24ad402595ccd7d1fb755765470f0f76cdefb1520808b9de77bc3ba3"
   license "MIT"
   head "https://github.com/miguelriotinto/ClaudeRelay.git", branch: "main"
 
@@ -13,7 +13,13 @@ class Clauderelay < Formula
     system "swift", "build",
            "-c", "release",
            "--disable-sandbox",
-           "-Xswiftc", "-cross-module-optimization"
+           "-Xswiftc", "-cross-module-optimization",
+           "--product", "claude-relay-server"
+    system "swift", "build",
+           "-c", "release",
+           "--disable-sandbox",
+           "-Xswiftc", "-cross-module-optimization",
+           "--product", "claude-relay"
     bin.install ".build/release/claude-relay"
     bin.install ".build/release/claude-relay-server"
   end
